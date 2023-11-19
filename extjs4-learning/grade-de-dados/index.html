@@ -12,39 +12,84 @@
 </body>
     <script type="text/javascript">
     	Ext.onReady(function(){
-		Ext.create('Ext.data.Store',{
-            storeId: 'meuGrid',
-            fields: ['nome', 'sobrenome', 'idade'],
-            data: {'items':[
-                {'nome':'Thiago', "sobrenome": "Gomes", "idade": "37"}
-            ]},
-            proxy: {
-                type: 'memory',
-                reader: {
-                    type: 'json',
-                    root: 'items'
+            //criar uma classe para o modelo
+            Ext.define('Usuario',{
+                extend: 'Ext.data.Model',
+                fields: ['nome', 'sobrenome', 'idade']
+            });
+        
+            // criar um local de armazenamento dos dados com um identificação em proxy
+            var store = Ext.create('Ext.data.Store',{
+                storeId: 'usuarioStore',
+                model: 'Usuario',
+                data: {'items':[
+                    {'nome': 'João', "sobrenome": "Pereira", "idade": 37}
+                ]},
+                proxy: {
+                    type: 'memory',
+                    reader: {
+                        type: 'json',
+                        root: 'items'
+                    }
                 }
-            }
-        }); // data.Store. Instancia do armazenamento dos dados 
-        // criar fields
-        //criar datas
-        // criar o proxy com type e reader: json items
-			
+            });
+        
+            // criar o grid com os dados
+            var grid = Ext.create('Ext.grid.Panel',{
+                title: 'Painel de Usuários',
+                store: 'usuarioStore',
+                width: 500,
+                height: 400,
+                columns: [
+                    {text: 'Nome', dataIndex: 'nome'},
+                    {text: 'Sobrenome', dataIndex: 'sobrenome', flex: 1},
+                    {text: 'Idade', dataIndex: 'idade'}
+                ],
+            });
 
-        //instancia do painel que renderiza os dados gr.Panel
-        Ext.create('Ext.grid.Panel',{
-            title: 'Meu Painel',
-            store: Ext.data.StoreManager.lookup('meuGrid'),
-            columns: [
-                {text: 'Nome', dataIndex: 'nome'},
-                {text: 'Sobrenome', dataIndex: 'sobrenome', flex:1},
-                {text: 'Idade', dataIndex: 'idade'}
-            ],
-            width: 500,
-            height: 400,
-            renderTo: Ext.getBody()
-        });
+            // criar um formulario com seus tipo, cabeçalhos e rótulos
+            var form = Ext.create('Ext.form.Panel',{
+                title: 'Formulário do usuário',
+                width: '50%',
+                height: 200,
+                region: 'north',
+                items: [
+                    {xtype: 'textfield', fieldLabel: 'Nome', name: 'nome'},
+                    {xtype: 'textfield', fieldLabel: 'Sobrenome', name: 'sobrenome'},
+                    {xtype: 'numberfield', minValue: 0, fieldLabel: 'Idade', name: 'idade'},
+                    {xtype: 'button', text: 'Enviar'},
+                ]
+            });
 
+            // criar um accordion com seus atributos e layout
+            var accordion = Ext.create('Ext.panel.Panel',{
+                title: 'Accordion do usuário',
+                width: 200,
+                layout: 'accordion',
+                region: 'west',
+                items: [
+                    {title: 'Item 1', html: 'Conteúdo do item 1'},
+                    {title: 'Item 2', html: 'Conteúdo do item 2'},
+                ]
+            });
+            
+            // criar janela com todos os items e container, mostrando-a no final
+           Ext.create('Ext.window.Window',{
+            title: 'Janela do usuário',
+            width: 800,
+            height: 600,
+            layout: 'border',
+            items: [accordion,{
+                xtype: 'container',
+                region: 'center',
+                layout: {
+                    type: 'vbox',
+                    align: 'stretch'
+                },
+                items: [form, grid]
+            }]
+
+           }).show()
 	});
     </script>
 </html>
