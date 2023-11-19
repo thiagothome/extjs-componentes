@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../resources/css/ext-all.css">
+    <script type="text/javascript" src="../ext-all.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+    <script type="text/javascript">
+    	Ext.onReady(function(){
+		Ext.create('Ext.window.Window',{
+			title: "Janela Modal",
+            width: 500,
+            height: 400,
+			renderTo: Ext.getBody(),
+            items: [
+                {
+                    xtype: 'panel',
+                    layout: 'form',
+                    bodyPadding: 10,
+                    defaultType: 'textfield',
+                    items: [
+                        {
+                            fieldLabel: 'Nome'
+                        },
+                        {
+                            fieldLabel: 'Sobrenome'
+                        },
+                        {
+                            fieldLabel: 'E-mail'
+                        }
+                    ]
+                }
+            ]
+           
+		}).show();
+			
+	})
+    </script>
+</html>

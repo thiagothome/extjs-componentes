@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../resources/css/ext-all.css">
+    <script type="text/javascript" src="../ext-all.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+    <script type="text/javascript">
+    	Ext.onReady(function () {
+            Ext.define('TreeNode',{
+                extend: 'Ext.data.Model',
+                fields: ['text', 'leaf', 'children']
+            });
+
+            var data = {
+                expanded: true,
+                children: [
+                    {
+                        text: 'Dir 1',
+                        expanded: false,
+                        children: [
+                            {
+                                text: 'arquivo 1', 
+                                leaf: true
+                            }
+                        ]
+                    }
+                ]
+            }
+
+            var store = Ext.create('Ext.data.TreeStore',{
+                model: 'TreeNode',
+                root: data
+            })
+
+    var tree = Ext.create('Ext.tree.Panel',{
+        title: 'Árvore de diretórios',
+        width: 300,
+        height: 600,
+        store: store,
+        renderTo: Ext.getBody(),
+    })
+});
+    </script>
+</html>

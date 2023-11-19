@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../resources/css/ext-all.css">
+    <script type="text/javascript" src="../ext-all.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+    <script type="text/javascript">
+    	Ext.onReady(function(){
+		Ext.create('Ext.button.Button',{
+			text: "Clique em mim",
+			renderTo: Ext.getBody(),
+            handler: function(){
+                alert("Informações salvas com sucesso !")
+            }
+		});
+			
+	});
+    </script>
+</html>

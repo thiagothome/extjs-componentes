@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../resources/css/ext-all.css">
+    <script type="text/javascript" src="../ext-all.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+    <script type="text/javascript">
+    	Ext.onReady(function(){
+		Ext.create('Ext.data.Store',{
+            storeId: 'meuGrid',
+            fields: ['nome', 'sobrenome', 'idade'],
+            data: {'items':[
+                {'nome':'Thiago', "sobrenome": "Gomes", "idade": "37"}
+            ]},
+            proxy: {
+                type: 'memory',
+                reader: {
+                    type: 'json',
+                    root: 'items'
+                }
+            }
+        }); // data.Store. Instancia do armazenamento dos dados 
+        // criar fields
+        //criar datas
+        // criar o proxy com type e reader: json items
+			
+
+        //instancia do painel que renderiza os dados gr.Panel
+        Ext.create('Ext.grid.Panel',{
+            title: 'Meu Painel',
+            store: Ext.data.StoreManager.lookup('meuGrid'),
+            columns: [
+                {text: 'Nome', dataIndex: 'nome'},
+                {text: 'Sobrenome', dataIndex: 'sobrenome', flex:1},
+                {text: 'Idade', dataIndex: 'idade'}
+            ],
+            width: 500,
+            height: 400,
+            renderTo: Ext.getBody()
+        });
+
+	});
+    </script>
+</html>

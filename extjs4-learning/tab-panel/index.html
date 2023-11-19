@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../resources/css/ext-all.css">
+    <script type="text/javascript" src="../ext-all.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+    <script type="text/javascript">
+    	Ext.onReady(function(){
+            var tabs = Ext.create('Ext.tab.Panel',{
+			title: 'Minha tab panel',
+            width: 500,
+            height: 400,
+            items: [
+                {
+                    title: 'tab 1',
+                    html: 'Conteúdo tab 1'                    
+                },
+                {
+                    title: 'tab 2',
+                    html: 'Conteúdo tab 2'                    
+                }
+            ],
+            renderTo: Ext.getBody(),
+		});
+
+        Ext.create('Ext.button.Button', {
+            text: 'Nova aba',
+            scope: this,
+            handler: function(){
+                var tab = tabs.add({
+                    title: 'Tab' + (tabs.items.length + 1),
+                    html: 'Outra tab'
+                });
+            },
+            renderTo: Ext.getBody()
+        })
+			
+	});
+    </script>
+</html>
